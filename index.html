@@ -27,16 +27,6 @@
         `;
     document.body.appendChild(darkModeToggle);
     });
-  
-    $('#dark-mode-btn').click(function() {
-        $('body').toggleClass('dark-mode');
-        const isDark = $('body').hasClass('dark-mode');
-
-         $(this).html(
-               `<i class="fas ${isDark ? 'fa-sun' : 'fa-moon'}" style="font-size: 1.2rem;"></i>`
-         );
-    });
-
 
     const gallery = [
         { src: 'img/jetson-setup.jpg', alt: 'Jetson Nano setup' },
