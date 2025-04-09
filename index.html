@@ -19,13 +19,6 @@
                 $('html, body').animate({ scrollTop: target.offset().top - 80 }, 800);
             }
         });
-        const darkModeToggle = document.createElement('div');
-        darkModeToggle.innerHTML = `
-         <button id="dark-mode-btn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 99;">
-          <i class="fas fa-moon"></i>
-          </button>
-        `;
-    document.body.appendChild(darkModeToggle);
     });
 
     const gallery = [
