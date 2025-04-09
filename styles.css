@@ -1,0 +1,362 @@
+/* Variables de color cálidas */
+:root {
+    --warm-dark: #1f1300;
+    --warm-accent: #ffb347;
+    --warm-highlight: #ffd580;
+    --warm-text: #ffe9c6;
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--warm-dark);
+    color: var(--warm-text);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Space Mono', monospace;
+    color: var(--warm-accent);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+header {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(rgba(31, 19, 0, 0.85), rgba(31, 19, 0, 0.85)),
+                url('https://images.unsplash.com/photo-1581092334847-4c4f50ea1ac2?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    background: var(--warm-accent);
+    color: var(--warm-dark);
+    padding: 12px 24px;
+    margin: 1rem 0;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 179, 71, 0.4);
+}
+
+/* Secciones */
+section {
+    margin: 4rem 0;
+}
+
+.highlight-section {
+    background: var(--warm-highlight);
+    color: var(--warm-dark);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Enlaces */
+.text-link {
+    color: var(--warm-accent);
+    text-decoration: none;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+}
+
+/* Texto pequeño */
+.small-text {
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding: 1rem;
+    }
+    
+    header {
+        padding: 2rem 1rem;
+    }
+}
+
+/* ===== Dark Mode Toggle Still Works ===== */
+body.dark-mode {
+    --warm-dark: #1a0f00;
+    --warm-text: #fff3e0;
+    --warm-accent: #ffc285;
+    background-color: var(--warm-dark);
+}
+
+/* ===== Galería ===== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    border: 2px solid var(--warm-accent);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Efecto hover */
+.btn:hover, .gallery-item:hover {
+    box-shadow: 0 5px 15px rgba(255, 179, 71, 0.3);
+}
+
+/* Añadir animación de deslizamiento a las secciones */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+/* Efecto hover sobre los botones para hacerlo más interactivo */
+.btn:hover {
+    transform: scale(1.05); /* Aumentar tamaño al pasar el ratón */
+    transition: transform 0.3s;
+}
+
+/* Efecto hover sobre las imágenes de la galería */
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 25px rgba(255, 179, 71, 0.4);
+}
+
+/* Transición en los enlaces */
+.text-link {
+    transition: color 0.3s;
+}
+.text-link:hover {
+    color: var(--warm-accent);
+}
+
+/* Añadir animación de deslizamiento a las secciones */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Hacer que las secciones se deslicen al llegar al viewport */
+section {
+    animation: slideIn 1s ease-out forwards; /* 'forwards' asegura que mantenga el estado final de la animación */
+    opacity: 0; /* Iniciar invisibles */
+    transform: translateX(-50px); /* Deslizar desde la izquierda */
+}
+
+/* Cuando la sección esté en el viewport, se activa la animación */
+.section-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Partículas flotantes */
+.floating-particle {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none; /* Para no interferir con clicks */
+    z-index: -1; /* Detrás del contenido */
+    animation: float 15s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(20px, 20px);
+    }
+    50% {
+        transform: translate(-10px, 30px);
+    }
+    75% {
+        transform: translate(15px, -10px);
+    }
+}
+
+/* ===== ESTILOS PARA FOTO PERFIL CIRCULAR ===== */
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem; /* Reducimos el padding para más equilibrio */
+}
+
+.profile-pic-container {
+    width: 180px;       /* Tamaño del círculo (más grande) */
+    height: 180px;      /* Mismo valor que width para que sea perfecto */
+    border-radius: 50%; /* Esto hace el círculo */
+    overflow: hidden;   /* Recorta la imagen para que encaje en el círculo */
+    border: 4px solid var(--warm-accent); /* Borde amarillo */
+    box-shadow: 0 0 20px rgba(255, 179, 71, 0.4); /* Sombra dorada opcional */
+    margin-bottom: 1.5rem; /* Espacio debajo de la foto */
+}
+
+/* Ajuste para móviles (opcional) */
+@media (max-width: 768px) {
+    .profile-pic-container {
+        width: 130px;
+        height: 130px;
+    }
+}
+.profile-pic {
+    width: 100%;        /* Ocupa todo el contenedor circular */
+    height: 100%;       /* Altura igual al ancho */
+    object-fit: cover;  /* Ajuste mágico para recortar y centrar la foto */
+    object-position: center; /* Enfoca el centro de la imagen */
+    transition: transform 0.3s; /* Efecto hover suave */
+}
+
+/* ===== HEADER MOBILE-FIRST ===== */
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem; /* Más compacto en móvil */
+}
+
+.profile-pic-container {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+}
+
+/* ===== TIPOGRAFÍA RESPONSIVE ===== */
+h1 {
+    font-size: 1.8rem; /* Base móvil */
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.container {
+    padding: 1rem;
+    max-width: 100%;
+}
+
+/* ===== SECCIONES ===== */
+section {
+    margin: 2.5rem 0;
+    padding: 1rem;
+    animation: none; /* Desactivamos animaciones en móvil */
+}
+
+.highlight-section {
+    padding: 1.5rem;
+}
+
+/* ===== GALERÍA MOBILE ===== */
+.gallery-grid {
+    grid-template-columns: 1fr; /* Una columna en móvil */
+    gap: 15px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    padding: 1.5rem 1rem;
+    font-size: 0.8rem;
+}
+
+/* ===== MEDIA QUERIES PARA ESCRITORIO ===== */
+@media (min-width: 768px) {
+    .header-content {
+        padding: 3rem 2rem;
+    }
+    
+    .profile-pic-container {
+        width: 150px;
+        height: 150px;
+    }
+    
+    h1 {
+        font-size: 2.3rem;
+    }
+    
+    .container {
+        padding: 2rem;
+    }
+    
+    section {
+        animation: slideIn 1s ease-out forwards;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+/* ===== AJUSTES ESPECÍFICOS PARA MÓVIL PEQUEÑO (<= 480px) ===== */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .profile-pic-container {
+        width: 100px;
+        height: 100px;
+    }
+}

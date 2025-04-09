@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- jQuery (CDN) + FontAwesome -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision at the Edge: AI Deployment from a Telecom Engineering Perspective</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<script>
+    $(document).ready(function() {
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            const target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top - 80 }, 800);
+            }
+        });
+    });
+
+    const darkModeToggle = document.createElement('div');
+    darkModeToggle.innerHTML = `
+      <button id="dark-mode-btn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 99;">
+        <i class="fas fa-moon"></i>
+      </button>
+    `;
+    document.body.appendChild(darkModeToggle);
+
+    $('#dark-mode-btn').click(function() {
+        $('body').toggleClass('dark-mode');
+        $(this).html($('body').hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>');
+    });
+    
+    $('#dark-mode-btn').click(function() {
+        $(this).html($('body').hasClass('dark-mode') ? 
+            '<i class="fas fa-sun" style="font-size: 1.2rem;"></i>' : 
+            '<iclass="fas fa-moon" style="font-size: 1.2rem;"></i>');
+    });
+
+    const gallery = [
+        { src: 'img/jetson-setup.jpg', alt: 'Jetson Nano setup' },
+        { src: 'img/fpga-board.jpg', alt: 'FPGA dev board' }
+    ];
+
+    const renderGallery = () => {
+        let html = '<div class="gallery-grid">';
+        gallery.forEach(item => {
+            html += `
+              <div class="gallery-item">
+                <img src="${item.src}" alt="${item.alt}" class="gallery-img">
+                <p>${item.alt}</p>
+              </div>
+            `;
+        });
+        html += '</div>';
+        $('#updates').append(html);
+    };
+
+    renderGallery();
+
+    const kofiScript = document.createElement('script');
+    kofiScript.src = 'https://storage.ko-fi.com/cdn/scripts/overlay-widget.js';
+    kofiScript.onload = () => {
+        kofiWidgetOverlay.draw('tu_usuario_ko-fi', {
+            'type': 'floating-chat',
+            'floating-chat.donateButton.text': 'Support Me',
+            'floating-chat.donateButton.background-color': '#64ffda'
+        });
+    };
+    document.body.appendChild(kofiScript);
+</script>
+<script>
+ function createFloatingParticles() {
+        const particleCount = 30;
+        const container = document.body;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'floating-particle';
+            
+            const size = Math.random() * 5 + 2;
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const delay = Math.random() * 10;
+            
+            particle.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                left: ${posX}vw;
+                top: ${posY}vh;
+                background-color: rgba(255, 179, 71, ${Math.random() * 0.5 + 0.1});
+                animation-delay: ${delay}s;
+                opacity: ${Math.random() * 0.7 + 0.3};
+            `;
+            
+            container.appendChild(particle);
+        }
+    }
+    // Detectar cuando las secciones están en el viewport para aplicar animación
+const sections = document.querySelectorAll('section');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        // Solo añadir la clase 'section-visible' si la sección entra en el viewport
+        if (entry.isIntersecting && !entry.target.classList.contains('section-visible')) {
+            entry.target.classList.add('section-visible'); // Se agrega la clase cuando entra en el viewport
+        }
+    });
+}, {
+    threshold: 0.5 // 50% de la sección debe estar visible para activarse
+});
+
+sections.forEach(section => {
+    observer.observe(section); // Comienza a observar cada sección
+});
+</script>
+<body>
+    <header>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+        <div class="header-content">
+            <div class="profile-pic-container">
+                <img src="DSC01866_pek.JPG" alt="Issam Oudriss Hajji" class="profile-pic">
+            </div>
+            <div class="header-text">
+                <h1>Computer Vision at the Edge: AI Deployment from a Telecom Engineering Perspective</h1>
+                <p>Final Degree Project by Issam Oudriss Hajji | Telecommunications Systems & Services Engineering | URV - IRCV Group</p>
+                <a href="#support" class="btn">Support the Project</a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section id="about">
+            <h2>About the Project</h2>
+            <p>This project investigates how computer vision models can be efficiently deployed on resource-constrained edge devices, such as the Jetson Nano, with future potential for FPGA integration. With a focus hardware-aware optimization, the work blends practical AI deployment with telecommunications engineering applications.</p>
+            <p>Challenges include compatibility with 2025 software stacks, power and thermal limitations, and striking a balance between inference accuracy and model size. The study also explores future expansion possibilities in networked edge environments.</p>
+            <p>The main idea consists on bringing the new world of AI and neural networks to small low-level applications in telecom engineering fields such as Internet of Things, Smart Cities or even Domotics.</p>
+            <p>Other potential applications for this low-level technologies might be automathic inspection of buildings for structural damage or crop disease, secure logging and logging management, or even early wild fire detection and wild-life monitoring in remote areas.</p>
+        </section>
+
+        <section id="goals">
+            <h2>Goals</h2>
+            <ul>
+                <li>Deploy and evaluate a computer vision model on Jetson Nano under modern constraints.</li>
+                <li>Deploying a variety of models on the Jetson Nano with a main focus on application limitations.</li>
+                <li>Optimize the model for real-time performance and low power consumption.</li>
+                <li>Analyze edge inference trade-offs vs. cloud-based processing.</li>
+                <li>Open-source optimized configurations and findings.</li>
+                <li>(Coming soon) Explore FPGA integration on other edge devices for performance comparisson.</li>
+            </ul>
+        </section>
+
+        <section id="support" class="highlight-section">
+            <h2>Support via Ko-fi</h2>
+            <p>Your donation helps fund essential hardware (Jetson Nano boards, sensors, FPGA kits) and supports the open publication of all results and tools. Contributors may receive custom 3D-printed tokens as a thank-you.</p>
+            <a href="https://ko-fi.com/issamoudriss" target="_blank" class="btn">
+                <i class="fas fa-coffee"></i> Buy Me a Coffee
+            </a>
+            <p class="small-text">Interested in sponsoring this project? Reach out by email.</p>
+        </section>
+        <section id="updates">
+            <h2>Progress Updates</h2>
+            <p>Follow ongoing updates and technical logs on <a href="https://www.linkedin.com/in/issam-oudriss-hajji-6269721b7/" class="text-link">LinkedIn</a>.</p>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 | TFG URV - DEIM Department | Mentor: Prof. Hatem Rashwan</p>
+        <p>Contact me: <a href="hatem.abdellatif@urv.cat" class="text-link">issam.53c@gmail.com</a></p>
+    </footer>
+</body>
+</html>
