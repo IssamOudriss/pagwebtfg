@@ -6,6 +6,11 @@
     --warm-text: #ffe9c6;
 }
 
+.container, header, section {
+    position: relative;
+    z-index: 1;
+}
+
 /* Estilos generales */
 body {
     font-family: 'Montserrat', sans-serif;
@@ -343,6 +348,15 @@ footer {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 }
+
+@media (max-width: 768px) {
+    section {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+  }
+  
 
 /* ===== AJUSTES ESPECÍFICOS PARA MÓVIL PEQUEÑO (<= 480px) ===== */
 @media (max-width: 480px) {

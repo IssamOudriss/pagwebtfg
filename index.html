@@ -19,26 +19,24 @@
                 $('html, body').animate({ scrollTop: target.offset().top - 80 }, 800);
             }
         });
-    });
-
-    const darkModeToggle = document.createElement('div');
-    darkModeToggle.innerHTML = `
-      <button id="dark-mode-btn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 99;">
-        <i class="fas fa-moon"></i>
-      </button>
-    `;
+        const darkModeToggle = document.createElement('div');
+        darkModeToggle.innerHTML = `
+         <button id="dark-mode-btn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 99;">
+          <i class="fas fa-moon"></i>
+          </button>
+        `;
     document.body.appendChild(darkModeToggle);
-
+    });
+  
     $('#dark-mode-btn').click(function() {
         $('body').toggleClass('dark-mode');
-        $(this).html($('body').hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>');
+        const isDark = $('body').hasClass('dark-mode');
+
+         $(this).html(
+               `<i class="fas ${isDark ? 'fa-sun' : 'fa-moon'}" style="font-size: 1.2rem;"></i>`
+         );
     });
-    
-    $('#dark-mode-btn').click(function() {
-        $(this).html($('body').hasClass('dark-mode') ? 
-            '<i class="fas fa-sun" style="font-size: 1.2rem;"></i>' : 
-            '<iclass="fas fa-moon" style="font-size: 1.2rem;"></i>');
-    });
+
 
     const gallery = [
         { src: 'img/jetson-setup.jpg', alt: 'Jetson Nano setup' },
@@ -119,7 +117,6 @@ sections.forEach(section => {
 </script>
 <body>
     <header>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
         <div class="header-content">
             <div class="profile-pic-container">
                 <img src="DSC01866_pek.JPG" alt="Issam Oudriss Hajji" class="profile-pic">
