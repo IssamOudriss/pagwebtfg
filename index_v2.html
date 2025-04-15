@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- jQuery (CDN) + FontAwesome -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision at the Edge: AI Deployment from a Telecom Engineering Perspective</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="alternate" hreflang="ca" href="https://github.com/IssamOudriss/pagwebtfg/index_v2_cat.html" />
+    <div class="language-switcher">
+        <a href="index_v2.html" class="lang-btn active">EN</a> 
+        <span class="separator">|</span>
+        <a href="index_v2_cat.html" class="lang-btn">CAT</a>
+    </div>
+</head>
+<script>
+    $(document).ready(function() {
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            const target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top - 80 }, 800);
+            }
+        });
+    });
+
+    const gallery = [
+        { src: 'img/jetson-setup.jpg', alt: 'Jetson Nano setup' },
+        { src: 'img/fpga-board.jpg', alt: 'FPGA dev board' }
+    ];
+
+    const renderGallery = () => {
+        let html = '<div class="gallery-grid">';
+        gallery.forEach(item => {
+            html += `
+              <div class="gallery-item">
+                <img src="${item.src}" alt="${item.alt}" class="gallery-img">
+                <p>${item.alt}</p>
+              </div>
+            `;
+        });
+        html += '</div>';
+        $('#updates').append(html);
+    };
+
+    renderGallery();
+
+    const kofiScript = document.createElement('script');
+    kofiScript.src = 'https://storage.ko-fi.com/cdn/scripts/overlay-widget.js';
+    kofiScript.onload = () => {
+        kofiWidgetOverlay.draw('tu_usuario_ko-fi', {
+            'type': 'floating-chat',
+            'floating-chat.donateButton.text': 'Support Me',
+            'floating-chat.donateButton.background-color': '#64ffda'
+        });
+    };
+    document.body.appendChild(kofiScript);
+</script>
+<script>
+ function createFloatingParticles() {
+        const particleCount = 30;
+        const container = document.body;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'floating-particle';
+            
+            const size = Math.random() * 5 + 2;
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const delay = Math.random() * 10;
+            
+            particle.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                left: ${posX}vw;
+                top: ${posY}vh;
+                background-color: rgba(255, 179, 71, ${Math.random() * 0.5 + 0.1});
+                animation-delay: ${delay}s;
+                opacity: ${Math.random() * 0.7 + 0.3};
+            `;
+            
+            container.appendChild(particle);
+        }
+    }
+    // Detectar cuando las secciones están en el viewport para aplicar animación
+const sections = document.querySelectorAll('section');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        // Solo añadir la clase 'section-visible' si la sección entra en el viewport
+        if (entry.isIntersecting && !entry.target.classList.contains('section-visible')) {
+            entry.target.classList.add('section-visible'); // Se agrega la clase cuando entra en el viewport
+        }
+    });
+}, {
+    threshold: 0.5 // 50% de la sección debe estar visible para activarse
+});
+
+sections.forEach(section => {
+    observer.observe(section); // Comienza a observar cada sección
+});
+</script>
+<script>
+    // Slider functionality
+document.addEventListener('DOMContentLoaded', () => {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.querySelector('.slider-dots');
+    const slider = document.querySelector('.slider');
+
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('slider-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.slider-dot');
+
+    function updateSlider() {
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlider();
+    }
+
+    document.getElementById('nextSlide').addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlider();
+    });
+
+    document.getElementById('prevSlide').addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlider();
+    });
+
+    // Auto-slide (opcional)
+    let slideInterval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlider();
+    }, 8000);
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    slider.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+        }, 8000);
+     });
+    });
+</script>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="profile-pic-container">
+                <img src="DSC01866_pek.JPG" alt="Issam Oudriss Hajji" class="profile-pic">
+            </div>
+            <div class="header-text">
+                <h1>Computer Vision at the Edge: AI Deployment from a Telecom Engineering Perspective</h1>
+                <p>Final Degree Project by Issam Oudriss Hajji | Telecommunications Systems & Services Engineering | URV - IRCV Group</p>
+                <a href="#support" class="btn">Support the Project</a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section id="about">
+            <h2>About the Project</h2>
+            <p>Modern artificial intelligence is currently facing several significant challenges that hinder its widespread adoption. These include its <strong>high energy consumption</strong>, which requires substantial power resources, and its need for <strong>massive computational power</strong>, which often exceeds the capabilities of many devices. Furthermore, AI’s dependence on <strong>data centers</strong> means it relies heavily on cloud infrastructure, making it unsuitable for use in environments that require real-time decision-making or operate in remote, disconnected locations. </p>
+            <p>As a result, its application in areas such as <strong>autonomous vehicles</strong>, <strong>smart manufacturing</strong>, and <strong>high-performance robotics</strong> remains limited.</p>
+        </section>
+
+        <section id="core-project">
+            <h2>The Core of the Project</h2>
+            <p>In this project, I am exploring the intersection of <strong>computer vision</strong> and <strong>edge computing</strong>, focusing on deploying AI models in <strong>resource-constrained environments</strong>. The goal is to bring AI to small, portable devices like the <strong>Jetson Nano</strong>, which can run complex algorithms efficiently while being <strong>lightweight</strong> and <strong>cost-effective</strong>.</p>
+            <p>The goal is to enable <strong>real-time image</strong> and <strong>video analysis</strong> in remote, autonomous, and low-cost systems, such as drones, robots, and security systems, without relying on <strong>cloud infrastructure</strong>.</p>
+        </section>
+
+        <section id="slides"">
+            <!-- <h2>Project Highlights</h2> -->
+            <div class="slider-container">
+                <div class="slider">
+                    <!-- Slide 1 - Current Problems -->
+                    <div class="slide active">
+                        <div class="slide-content" style="border-left: 5px solid #4285F4;">
+                            <h3>Challenges of Modern AI</h3>
+                            <ul class="slide-list">
+                                <p>⚡ High energy consumption</p>
+                                <p>🧠 Requires massive computing power</p>
+                                <p>☁️ Cloud-dependent</p>
+                                <p>🚫 Not suitable for autonomous/remote systems</p>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 - Emerging Solutions -->
+                    <div class="slide">
+                        <div class="slide-content" style="border-left: 5px solid #34A853;">
+                            <h3>Edge Computing Solutions</h3>
+                            <ul class="slide-list">
+                                <p>🌐Local processing without cloud</p>
+                                <p>🖥️GPUs (NVIDIA)</p>
+                                <p>⚙️FPGAs (AMD)</p>
+                                <p>🔌NPUs (dedicated AI processors)</p>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 - My Approach -->
+                    <div class="slide">
+                        <div class="slide-content" style="border-left: 5px solid #FBBC05;">
+                            <h3>Computer Vision at the Edge</h3>
+                            <ul class="slide-list">
+                                <p>🔧Model optimization</p>
+                                <p>🔋Power consumption reduction</p>
+                                <p>⏱️Real-time performance</p>
+                                <p>📱Small portable devices</p>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4 - Real Applications -->
+                    <div class="slide">
+                        <div class="slide-content" style="border-left: 5px solid #EA4335;">
+                            <h3>Real-World Applications</h3>
+                            <ul class="slide-list">
+                                <p>🚁 Autonomous drones</p>
+                                <p>🤖 Smart robots</p>
+                                <p>🔐 Real-time security systems</p>
+                                <p>🧪 Portable medical devices</p>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button id="prevSlide" class="slider-btn" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-dots"></div>
+                    <button id="nextSlide" class="slider-btn" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+        <!-- <section id="slides" class="highlight-section">
+            <h2>Project Highlights</h2>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide active">
+                        <div class="slide-content">
+                            <h3><i class="fas fa-microchip"></i> Real-time AI at the Edge</h3>
+                            <p>Deploying computer vision models directly on low-power devices like the Jetson Nano with under 30W power consumption.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h3><i class="fas fa-project-diagram"></i> FPGA Integration</h3>
+                            <p>Exploring AMD's reprogrammable chips to accelerate neural networks with µs latency for telecom applications.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h3><i class="fas fa-battery-three-quarters"></i> Efficiency First</h3>
+                            <p>Optimizing models through quantization (INT8) and pruning for 60% energy reduction on embedded systems.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button id="prevSlide" class="slider-btn" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-dots"></div>
+                    <button id="nextSlide" class="slider-btn" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>           -->
+
+        <section id="goals">
+            <h2>Goals</h2>
+            <ul>
+                <li>Deploy and evaluate a computer vision model on Jetson Nano under modern constraints.</li>
+                <li>Deploying a variety of models on the Jetson Nano with a main focus on application limitations.</li>
+                <li>Optimize the model for <strong>real-time performance</strong> and <strong>low power consumption</strong>.</li>
+                <li>Analyze edge inference trade-offs vs. cloud-based processing.</li>
+                <li>Open-source optimized configurations and findings.</li>
+                <li>(Coming soon) Explore FPGA integration on other edge devices for performance comparisson.</li>
+            </ul>
+        </section>
+
+        <section id="support" class="highlight-section">
+            <h2>Support via Ko-fi</h2>
+            <p>Your donation helps fund essential hardware (<strong>Jetson Nano</strong> boards, sensors, FPGA kits) and supports the open publication of all results and tools.</p>
+            <a href="https://ko-fi.com/issamoudriss" target="_blank" class="btn">
+                <i class="fas fa-coffee"></i> Buy Me a Coffee
+            </a>
+            <p class="small-text">Interested in sponsoring this project? Reach out by email.</p>
+        </section>
+        
+        <section id="updates">
+            <h2>Progress Updates</h2>
+            <p>Follow ongoing updates and technical logs on <a href="https://www.linkedin.com/in/issam-oudriss-hajji-6269721b7/" class="text-link">LinkedIn</a>.</p>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 | TFG URV - DEIM Department | Mentor: Prof. Hatem Rashwan</p>
+        <p>Contact me: <a href="issam.oudriss@estudiants.urv.cat" class="text-link">issam.oudriss@estudiants.urv.cat</a></p>
+    </footer>
+</body>
+</html>

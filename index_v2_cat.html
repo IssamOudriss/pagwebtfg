@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <!-- jQuery (CDN) + FontAwesome -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visió per Computador a l'Edge: Implementació d'IA des d'una Perspectiva d'Enginyeria de Telecomunicacions</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="alternate" hreflang="en" href="https://github.com/IssamOudriss/pagwebtfg/index_v2.html" />
+    <div class="language-switcher">
+        <a href="index_v2.html" class="lang-btn">EN</a> 
+        <span class="separator">|</span>
+        <a href="index_v2_cat.html" class="lang-btn active">CAT</a>
+    </div>
+</head>
+<script>
+    $(document).ready(function() {
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            const target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top - 80 }, 800);
+            }
+        });
+    });
+
+    const gallery = [
+        { src: 'img/jetson-setup.jpg', alt: 'Configuració de Jetson Nano' },
+        { src: 'img/fpga-board.jpg', alt: 'Placa de desenvolupament FPGA' }
+    ];
+
+    const renderGallery = () => {
+        let html = '<div class="gallery-grid">';
+        gallery.forEach(item => {
+            html += `
+              <div class="gallery-item">
+                <img src="${item.src}" alt="${item.alt}" class="gallery-img">
+                <p>${item.alt}</p>
+              </div>
+            `;
+        });
+        html += '</div>';
+        $('#updates').append(html);
+    };
+
+    renderGallery();
+
+    const kofiScript = document.createElement('script');
+    kofiScript.src = 'https://storage.ko-fi.com/cdn/scripts/overlay-widget.js';
+    kofiScript.onload = () => {
+        kofiWidgetOverlay.draw('tu_usuario_ko-fi', {
+            'type': 'floating-chat',
+            'floating-chat.donateButton.text': 'Suporta el projecte',
+            'floating-chat.donateButton.background-color': '#64ffda'
+        });
+    };
+    document.body.appendChild(kofiScript);
+</script>
+<script>
+ function createFloatingParticles() {
+        const particleCount = 30;
+        const container = document.body;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'floating-particle';
+            
+            const size = Math.random() * 5 + 2;
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const delay = Math.random() * 10;
+            
+            particle.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                left: ${posX}vw;
+                top: ${posY}vh;
+                background-color: rgba(255, 179, 71, ${Math.random() * 0.5 + 0.1});
+                animation-delay: ${delay}s;
+                opacity: ${Math.random() * 0.7 + 0.3};
+            `;
+            
+            container.appendChild(particle);
+        }
+    }
+    // Detectar quan les seccions estan dins del viewport per aplicar animació
+const sections = document.querySelectorAll('section');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        // Només afegir la classe 'section-visible' si la secció entra dins del viewport
+        if (entry.isIntersecting && !entry.target.classList.contains('section-visible')) {
+            entry.target.classList.add('section-visible'); // Afegir la classe quan entra dins del viewport
+        }
+    });
+}, {
+    threshold: 0.5 // 50% de la secció ha d'estar visible per activar-se
+});
+
+sections.forEach(section => {
+    observer.observe(section); // Començar a observar cada secció
+});
+</script>
+<script>
+    // Funcionalitat de Slider
+document.addEventListener('DOMContentLoaded', () => {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.querySelector('.slider-dots');
+    const slider = document.querySelector('.slider');
+
+    // Crear punts
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('slider-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.slider-dot');
+
+    function updateSlider() {
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Actualitzar punts
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlider();
+    }
+
+    document.getElementById('nextSlide').addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlider();
+    });
+
+    document.getElementById('prevSlide').addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlider();
+    });
+
+    // Auto-slide (opcional)
+    let slideInterval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlider();
+    }, 8000);
+
+    // Pausar en passar el ratolí
+    slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    slider.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+        }, 8000);
+     });
+    });
+</script>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="profile-pic-container">
+                <img src="DSC01866_pek.JPG" alt="Issam Oudriss Hajji" class="profile-pic">
+            </div>
+            <div class="header-text">
+                <h1>Computer Vision at the Edge: AI Deployment from a Telecom Engineering Perspective</h1>
+                <p>Projecte de Final de Grau per Issam Oudriss Hajji | Enginyeria de Sistemes i Serveis de Telecomunicació | URV - IRCV Group</p>
+                <a href="#support" class="btn">Colabora amb el projecte</a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section id="about">
+            <h2>Context i justificació</h2>
+            <p>L'IA s'enfronta a diversos reptes importants que dificulten la seva adopció generalitzada. Aquests inclouen el seu <strong>alt consum d'energia</strong>, que requereix grans recursos energètics, i la seva necessitat de <strong>gran potència de càlcul</strong>, que sovint supera les capacitats de molts dispositius. A més, la dependència de l'IA dels <strong>centres de dades</strong> significa que depèn fortament de la infraestructura al núvol, cosa que la fa inadequada per al seu ús en entorns que requereixen presa de decisions en temps real o que operen en ubicacions remotes i desconnectades.</p>
+            <p>Com a resultat, la seva aplicació en àrees com <strong>vehicles autònoms</strong>, <strong>manufactura intel·ligent</strong> i <strong>robòtica d'alta prestació</strong> continua sent limitada.</p>
+        </section>
+
+        <section id="core-project">
+            <h2>El Projecte</h2>
+            <p>En aquest projecte, estic explorant la intersecció entre la <strong>visió per computador</strong> i la <strong>computació a l'edge</strong>, amb un enfocament especial en la implementació de models d'IA en <strong>entorns amb recursos limitats</strong>. L'objectiu és portar la IA a dispositius petits i portàtils com el <strong>Jetson Nano</strong>, que poden executar algoritmes complexos de manera eficaç, tot sent <strong>lleugers</strong> i <strong>cost-efectius</strong>.</p>
+            <p>L'objectiu és permetre l'<strong>anàlisi d'imatges</strong> i <strong>vídeo en temps real</strong> en sistemes remots, autònoms i de baix cost, com ara drons, robots i sistemes de seguretat, sense dependre de la infraestructura al núvol.</p>
+        </section>
+
+        <section id="slides">
+            <div class="slider-container">
+                <div class="slider">
+                    <!-- Slide 1 - Reptes Actuals -->
+                    <div class="slide active">
+                        <div class="slide-content" style="border-left: 5px solid #4285F4;">
+                            <h3>Reptes de l'IA Moderna</h3>
+                            <ul class="slide-list">
+                                <p>⚡ Alt consum d'energia</p>
+                                <p>🧠 Requereix gran potència de càlcul</p>
+                                <p>☁️ Depèn del núvol</p>
+                                <p>🚫 No apte per a sistemes autònoms/remots</p>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 - Solucions Emergents -->
+                    <div class="slide">
+                        <div class="slide-content" style="border-left: 5px solid #34A853;">
+                            <h3>Solucions de Computació a l'Edge</h3>
+                            <ul class="slide-list">
+                                <p>🌐 Processament local sense núvol</p>
+                                <p>🖥️ GPUs (NVIDIA)</p>
+                                <p>⚙️ FPGAs (AMD)</p>
+                                <p>🔌 NPUs (processadors dedicats per IA)</p>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 - La Meva Enfocament -->
+                    <div class="slide">
+                        <div class="slide-content" style="border-left: 5px solid #FBBC05;">
+                            <h3>Visió per Computador a l'Edge</h3>
+                            <ul class="slide-list">
+                                <p>🔧 Optimització de models</p>
+                                <p>🔋 Reducció del consum d'energia</p>
+                                <p>⏱️ Rendiment en temps real</p>
+                                <p>📱 Dispositius petits i portàtils</p>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4 - Aplicacions Reals -->
+                    <div class="slide">
+                        <div class="slide-content" style="border-left: 5px solid #EA4335;">
+                            <h3>Aplicacions del Món Real</h3>
+                            <ul class="slide-list">
+                                <p>🚁 Drones autònoms</p>
+                                <p>🤖 Robots intel·ligents</p>
+                                <p>🔐 Sistemes de seguretat en temps real</p>
+                                <p>🧪 Dispositius mèdics portàtils</p>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button id="prevSlide" class="slider-btn" aria-label="Secció anterior"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-dots"></div>
+                    <button id="nextSlide" class="slider-btn" aria-label="Secció següent"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="goals">
+            <h2>Objectius</h2>
+            <ul>
+                <li>Desplegar i avaluar un model de visió per computador al Jetson Nano sota les limitacions modernes.</li>
+                <li>Desplegar una varietat de models al Jetson Nano amb un enfocament principal en les limitacions de l'aplicació.</li>
+                <li>Optimitzar el model per a <strong>rendiment en temps real</strong> i <strong>baix consum d'energia</strong>.</li>
+                <li>Analitzar els compromisos entre inferència a l'edge vs. processament al núvol.</li>
+                <li>Configuracions i resultats optimitzats de codi obert.</li>
+                <li>(Properament) Explorar la integració de FPGAs en altres dispositius edge per a comparativa de rendiment.</li>
+            </ul>
+        </section>        
+        
+        <section id="support" class="highlight-section">
+            <h2>Colaboració via Ko-fi</h2>
+            <p>La teva donació ajuda a finançar el maquinari essencial (<strong>Jetson Nano</strong>, taules, sensors, kits FPGA) i dona suport a la publicació oberta de tots els resultats i eines.</p>
+            <a href="https://ko-fi.com/issamoudriss" target="_blank" class="btn">
+                <i class="fas fa-coffee"></i> Buy Me a Coffee
+            </a>
+            <p class="small-text"> <p class="small-text">Estàs interessat en patrocinar aquest projecte? Contacta'm per correu electrònic.</p></p>
+        </section>
+
+        <section id="updates">
+            <h2>Actualitzacions del Progrés</h2>
+            <p>Segueix les actualitzacions contínues i els registres tècnics a <a href="https://www.linkedin.com/in/issam-oudriss-hajji-6269721b7/" class="text-link">LinkedIn</a>.</p>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 | TFG URV - Departament DEIM | Mentor: Prof. Hatem Rashwan</p>
+        <p>Contacta'm: <a href="issam.oudriss@estudiants.urv.cat" class="text-link">issam.oudriss@estudiants.urv.cat</a></p>
+    </footer>
+    
+</body>
+</html>
